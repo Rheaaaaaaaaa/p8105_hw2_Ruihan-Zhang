@@ -49,7 +49,7 @@ NYC_data =
 Mr.Trash_data = 
   read_excel("Mr.Trash/Trash Wheel Collection Data.xlsx") %>%
   janitor::clean_names() %>%
-  drop_na(Mr.Trash_data, Dumpster)
+  drop_na(., dumpster)
   
 
   
