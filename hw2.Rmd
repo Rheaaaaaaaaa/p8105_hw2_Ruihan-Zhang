@@ -29,6 +29,8 @@ plot(pressure)
 
 ```{r}
 library(tidyverse)
+library(readxl)
+library(dplyr)
 ```
 
 ```{r}
@@ -42,6 +44,15 @@ NYC_data =
     starts_with("route"), entry, exit_only, vending, entrance_type, 
     ada) %>% 
   mutate(entry = ifelse(entry == "YES", TRUE, FALSE))
+```
+```{r}
+Mr.Trash_data = 
+  read_excel("Mr.Trash/Trash Wheel Collection Data.xlsx") %>%
+  janitor::clean_names() %>%
+  drop_na(Mr.Trash_data, Dumpster)
+  
+
+  
 ```
 
 
