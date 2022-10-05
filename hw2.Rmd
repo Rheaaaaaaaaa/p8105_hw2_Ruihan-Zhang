@@ -31,6 +31,7 @@ plot(pressure)
 library(tidyverse)
 library(readxl)
 library(dplyr)
+library(tidyr)
 ```
 
 ```{r}
@@ -69,6 +70,17 @@ Professor_Trash_Data =
 ```{r}
 single_dataset = bind_rows(Mr.Trash_data, Professor_Trash_Data)
 ```
-The total weight of trash collected by Professor Trash Wheel is `r sum(Professor_Trash_Data$weight_tons)`. The total number of sports balls collected by Mr.Trash Wheel in 2020 was `r sum(Mr.Trash_data$sports_balls)`
+The total weight of trash collected by Professor Trash Wheel is `r sum(Professor_Trash_Data$weight_tons)`. The total number of sports balls collected by Mr.Trash Wheel in 2020 was `r sum(Mr.Trash_data$sports_balls)`.
+
+```{r}
+pols_month = 
+  read_csv(file = "./fivethirtyeight_datasets/pols-month.csv") %>%
+  janitor::clean_names() %>%
+  separate(., col = mon, into = c('year', 'month', 'day', sep='-')) %>%
+  
+
+  
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
