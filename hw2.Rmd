@@ -47,15 +47,28 @@ NYC_data =
 ```
 ```{r}
 Mr.Trash_data = 
-  read_excel("Mr.Trash/Trash Wheel Collection Data.xlsx") %>%
+  read_excel("Mr.Trash/Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel") %>%
   janitor::clean_names() %>%
-  drop_na(., dumpster)
-  
-
+  drop_na(., dumpster) %>%
+  mutate(sports_balls = as.integer(round(sports_balls))) %>%
+  select(., -x15) %>%
+  select(., -x16)
   
 ```
 
+```{r}
+Professor_Trash_Data = 
+  read_excel("Mr.Trash/Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel") %>%
+  janitor::clean_names() %>%
+  drop_na(., dumpster) %>%
+  mutate(sports_balls = 0) %>%
+  select(dumpster, month, year, date, weight_tons, volume_cubic_yards, plastic_bottles, polystyrene, cigarette_butts, glass_bottles, grocery_bags, chip_bags, sports_balls, homes_powered)%>%
+  mutate(year = as.character(year))
+```
 
-
+```{r}
+single_dataset = bind_rows(Mr.Trash_data, Professor_Trash_Data)
+```
+The total weight of trash collected by Professor Trash Wheel 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
