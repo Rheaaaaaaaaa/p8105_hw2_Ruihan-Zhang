@@ -90,7 +90,7 @@ The size is `r nrow(pols_month)` rows and `r ncol(pols_month)` columns. The rang
 snp = 
   read_csv(file = "./fivethirtyeight_datasets/snp.csv") %>%
   janitor::clean_names() %>%
-  separate(., col = date, into = c('year', 'month', 'day')) %>%
+  separate(., col = date, into = c('month', 'day', 'year')) %>%
   mutate(month = month.name[as.numeric(month)]) %>%
   select(-day)
   
@@ -108,18 +108,20 @@ unemployment =
                         'aug'='August', 'sep'='Septemper', 'oct'='October', 'nov'='November',
                         'dec'='December') )%>%
   mutate(year = as.character(year))
-  
-
+unemployment=mutate(unemployment,year=as.integer(year))  
+snp=mutate(snp,year=as.integer(year)) 
+pols_month=mutate(pols_month,year=as.integer(year)) 
+snp=mutate(snp, year = ifelse(year<20,year + 2000,year + 1900))
 ```
 The size is `r nrow(unemployment)` rows and `r ncol(unemployment)` columns. The range of years is
 `r range(unemployment$year, na.rm = TRUE)`. Names of variables are year, month, score.
 
 ```{r}
-join_datasets = left_join(pols_month, snp)
+join_datasets = left_join(pols_month, snp, by=c("year","month"))
 ```
 
 ```{r}
-datasets=left_join(join_datasets, unemployment)
+datasets=left_join(join_datasets, unemployment,by=c("year","month"))
 ```
 The size is `r nrow(datasets)` rows and `r ncol(datasets)` columns. The range of years is
 `r range(datasets$year, na.rm = TRUE)`. Names of variables are year, month,  gov_gop, sen_gop, rep_gop, gov_dem, sen_dem, rep_dem, president, close and score.
