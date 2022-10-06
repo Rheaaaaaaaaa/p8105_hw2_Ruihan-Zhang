@@ -82,6 +82,10 @@ pols_month =
   select(-prez_dem, -prez_gop, -day)
   
 ```
+The size is `r nrow(pols_month)` rows and `r ncol(pols_month)` columns. The range of years is
+`r range(pols_month$year, na.rm = TRUE)`. Names of variables are year, month, gov_gop, sen_gop, rep_gop, gov_dem, sen_dem, rep_dem, and president.
+
+
 ```{r}
 snp = 
   read_csv(file = "./fivethirtyeight_datasets/snp.csv") %>%
@@ -91,6 +95,9 @@ snp =
   select(-day)
   
 ```
+The size is `r nrow(snp)` rows and `r ncol(pols_month)` columns. The range of years is
+`r range(snp$year, na.rm = TRUE)`. Names of variables are year, month, close.
+
 ```{r}
 unemployment = 
   read_csv(file = "./fivethirtyeight_datasets/unemployment.csv") %>%
@@ -104,6 +111,8 @@ unemployment =
   
 
 ```
+The size is `r nrow(unemployment)` rows and `r ncol(unemployment)` columns. The range of years is
+`r range(unemployment$year, na.rm = TRUE)`. Names of variables are year, month, score.
 
 ```{r}
 join_datasets = left_join(pols_month, snp)
@@ -112,7 +121,8 @@ join_datasets = left_join(pols_month, snp)
 ```{r}
 datasets=left_join(join_datasets, unemployment)
 ```
-
+The size is `r nrow(datasets)` rows and `r ncol(datasets)` columns. The range of years is
+`r range(datasets$year, na.rm = TRUE)`. Names of variables are year, month,  gov_gop, sen_gop, rep_gop, gov_dem, sen_dem, rep_dem, president, close and score.
 
 
 
