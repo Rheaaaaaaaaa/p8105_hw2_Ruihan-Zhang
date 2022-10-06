@@ -81,8 +81,11 @@ pols_month =
   mutate(president = ifelse( prez_dem == 0, "dem", "gop"))%>%
   select(-prez_dem, -prez_gop, -day)
   
-
-  
+```
+```{r}
+snp = 
+  read_csv(file = "./fivethirtyeight_datasets/snp.csv") %>%
+  janitor::clean_names() 
 ```
 
 
