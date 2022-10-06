@@ -111,7 +111,7 @@ unemployment =
 unemployment=mutate(unemployment,year=as.integer(year))  
 snp=mutate(snp,year=as.integer(year)) 
 pols_month=mutate(pols_month,year=as.integer(year)) 
-snp=mutate(snp, year = ifelse(year<20,year + 2000,year + 1900))
+snp=mutate(snp, year = ifelse(year<22,year + 2000,year + 1900))
 ```
 The size is `r nrow(unemployment)` rows and `r ncol(unemployment)` columns. The range of years is
 `r range(unemployment$year, na.rm = TRUE)`. Names of variables are year, month, score.
