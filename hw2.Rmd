@@ -77,7 +77,8 @@ pols_month =
   read_csv(file = "./fivethirtyeight_datasets/pols-month.csv") %>%
   janitor::clean_names() %>%
   separate(., col = mon, into = c('year', 'month', 'day', sep='-')) %>%
-  mutate(month = month.name[as.numeric(month)])
+  mutate(month = month.name[as.numeric(month)]) %>%
+  mutate(president = ifelse( prez_dem == 0, "dem", "gop"))
   
 
   
