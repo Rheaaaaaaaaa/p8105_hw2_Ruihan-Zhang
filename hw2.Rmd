@@ -87,7 +87,14 @@ snp =
   read_csv(file = "./fivethirtyeight_datasets/snp.csv") %>%
   janitor::clean_names() %>%
   separate(., col = date, into = c('year', 'month', 'day')) %>%
-  mutate(month = month.name[as.numeric(month)]) 
+  mutate(month = month.name[as.numeric(month)]) %>%
+  select(-day)
+  
+```
+```{r}
+unemployment = 
+  read_csv(file = "./fivethirtyeight_datasets/unemployment.csv") %>%
+  janitor::clean_names() %>%
   
 ```
 
