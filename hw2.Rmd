@@ -99,12 +99,22 @@ unemployment =
   mutate(month = recode(month, 'jan' = 'January', 'feb'='Febuary', 'mar'='March',
                         'apr'='April', 'may'='May', 'jun'='June', 'jul'='July', 
                         'aug'='August', 'sep'='Septemper', 'oct'='October', 'nov'='November',
-                        'dec'='December') )
+                        'dec'='December') )%>%
+  mutate(year = as.character(year))
+  
+
 ```
 
 ```{r}
 join_datasets = left_join(pols_month, snp)
 ```
+
+```{r}
+datasets=left_join(join_datasets, unemployment)
+```
+
+
+
 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
